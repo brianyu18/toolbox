@@ -1,0 +1,11 @@
+{
+  "name": "brains",
+  "version": "0.1.0",
+  "description": "Workflow router skills that pick the right combination of superpowers + gstack skills for a development task based on its complexity.",
+  "author": {
+    "name": "Brian Yu"
+  },
+  "repository": "https://github.com/brianyu18/brains",
+  "license": "MIT",
+  "keywords": ["workflow", "router", "superpowers", "gstack", "orchestration"]
+}
