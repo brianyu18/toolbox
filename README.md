@@ -24,6 +24,26 @@ This repo is a **Claude Code plugin marketplace** containing one plugin (`brains
 
 Rule for escalating: if the router gets skipped on 5+ real task kickoffs, flip the hook on.
 
+## Browser automation convention
+
+When a playbook needs to drive a browser — to verify a UI change, reproduce a bug, or QA a feature — it uses gstack's headless browser stack, not the `mcp__claude-in-chrome__*` MCP tools. The distinction matters:
+
+- **`/browse` (gstack)** is a sandboxed headless Chromium. Clean state per run, parallel-safe, fast, with built-in QA primitives (before/after diffs, annotated screenshots, responsive checks). Zero blast radius — nothing reaches your real sessions.
+- **`mcp__claude-in-chrome__*`** drives your real Chrome, logged into everything. Higher realism but any click, form submit, or nav happens in your actual accounts. Not safe for automated judgment calls by an LLM.
+
+Where `/browse` (or skills built on it) shows up in brains:
+
+| Skill | Browser usage |
+|---|---|
+| `brains-simple` | None |
+| `brains-bug` | `/investigate` handles browser-involving bugs; it uses `/browse` internally |
+| `brains-feature` | Step 5 verification via `/browse` for UI; optional `/qa` gate; `/canary` post-ship if production-visible |
+| `brains-complex` | Phase 4 `/qa` + `/qa-only` for real-browser QA; `/canary` for production-visible changes |
+
+All of `/qa`, `/qa-only`, `/canary`, `/benchmark`, `/design-review`, and `/devex-review` are built on `/browse`, so the convention carries transitively. If you need real-browser realism (imported cookies, logged-in session) without losing the sandbox, use `/setup-browser-cookies` + `/connect-chrome` to bridge — don't reach for the MCP tools.
+
+Rule of thumb: never `mcp__claude-in-chrome__*` inside a brains playbook. If you think you need it, you actually want `/setup-browser-cookies` first.
+
 ## Install
 
 Inside a Claude Code session, run these slash commands:
