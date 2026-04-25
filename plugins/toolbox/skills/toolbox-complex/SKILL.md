@@ -1,9 +1,9 @@
 ---
-name: brains-complex
+name: toolbox-complex
 description: Use for new subsystems, multi-file rewrites, user-visible product changes with design stakes, or tasks with ambiguous scope or significant cross-cutting impact.
 ---
 
-# brains-complex
+# toolbox-complex
 
 High-stakes or high-ambiguity work. Maximum discipline, multi-angle plan review, parallelized execution.
 
@@ -39,7 +39,7 @@ High-stakes or high-ambiguity work. Maximum discipline, multi-angle plan review,
 
 ## Decision gates
 
-- **End of phase 1:** If the plan fits in a single subsystem with clear bounds and no UI/product/DX stakes, de-escalate to `brains-feature`.
+- **End of phase 1:** If the plan fits in a single subsystem with clear bounds and no UI/product/DX stakes, de-escalate to `toolbox-feature`.
 - **End of phase 2:** Minimum bar to leave review = `/plan-eng-review` + `/autoplan` completed. Skipping CEO/design/devex is a judgment call; state the reason to the user.
 - **During phase 3:** Prefer `subagent-driven-development` when tasks are truly independent; fall back to `executing-plans` when shared state or ordering matters.
 
@@ -50,7 +50,7 @@ High-stakes or high-ambiguity work. Maximum discipline, multi-angle plan review,
 - TDD per task.
 - `/review` + `/codex` before shipping.
 
-Shortcutting any of these means you are doing `brains-feature`, not `brains-complex`. Re-classify honestly via `brains`.
+Shortcutting any of these means you are doing `toolbox-feature`, not `toolbox-complex`. Re-classify honestly via `toolbox`.
 
 ## Escalation the other direction
 

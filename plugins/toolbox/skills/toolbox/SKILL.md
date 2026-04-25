@@ -1,9 +1,9 @@
 ---
-name: brains
+name: toolbox
 description: Use at the start of any non-trivial development task, feature request, bug report, or project/feature kickoff, before exploring code or making edits.
 ---
 
-# brains — workflow router
+# toolbox — workflow router
 
 Classify the incoming task, then invoke the matching sub-skill. Do this BEFORE exploring code, reading files, or editing anything.
 
@@ -11,10 +11,10 @@ Classify the incoming task, then invoke the matching sub-skill. Do this BEFORE e
 
 | Task shape | Route to |
 |---|---|
-| One-file edit, config tweak, doc change, rename, factual question | `brains-simple` |
-| Unexpected behavior, test failure, error message, regression, "why is this broken" | `brains-bug` |
-| New feature of medium scope in an existing product, clear subsystem | `brains-feature` |
-| New subsystem, multi-file rewrite, user-visible product change, ambiguous or cross-cutting scope | `brains-complex` |
+| One-file edit, config tweak, doc change, rename, factual question | `toolbox-simple` |
+| Unexpected behavior, test failure, error message, regression, "why is this broken" | `toolbox-bug` |
+| New feature of medium scope in an existing product, clear subsystem | `toolbox-feature` |
+| New subsystem, multi-file rewrite, user-visible product change, ambiguous or cross-cutting scope | `toolbox-complex` |
 
 ## Tiebreakers
 
@@ -29,4 +29,4 @@ Classify the incoming task, then invoke the matching sub-skill. Do this BEFORE e
 2. Invoke the sub-skill via the Skill tool.
 3. Follow its playbook.
 
-Do not skip to implementation. Each sub-skill adds discipline the naked task wouldn't. If the sub-skill feels like overhead for this task, you classified too high — re-run `brains`.
+Do not skip to implementation. Each sub-skill adds discipline the naked task wouldn't. If the sub-skill feels like overhead for this task, you classified too high — re-run `toolbox`.

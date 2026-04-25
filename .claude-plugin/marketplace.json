@@ -1,5 +1,5 @@
 {
-  "name": "brains",
+  "name": "toolbox",
   "owner": {
     "name": "Brian Yu"
   },
@@ -9,10 +9,10 @@
   },
   "plugins": [
     {
-      "name": "brains",
+      "name": "toolbox",
       "version": "0.1.0",
       "description": "Classifies incoming development tasks and dispatches to the right workflow (simple / bug / feature / complex).",
-      "source": "./plugins/brains"
+      "source": "./plugins/toolbox"
     }
   ]
 }

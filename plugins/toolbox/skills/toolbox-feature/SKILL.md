@@ -1,9 +1,9 @@
 ---
-name: brains-feature
+name: toolbox-feature
 description: Use when adding a new feature of medium scope to an existing product — clear intent, bounded surface area, single subsystem, user-visible or not.
 ---
 
-# brains-feature
+# toolbox-feature
 
 Medium-scope work gets full discipline but skips the multi-role review gauntlet reserved for complex work.
 
@@ -22,7 +22,7 @@ Medium-scope work gets full discipline but skips the multi-role review gauntlet 
 
 ## Decision gates
 
-- **After step 2 (plan written):** If the plan reveals multi-subsystem scope or high ambiguity, escalate to `brains-complex`.
+- **After step 2 (plan written):** If the plan reveals multi-subsystem scope or high ambiguity, escalate to `toolbox-complex`.
 - **After step 4 (implementation complete):** If this touches a running product, insert `/qa` (gstack) between steps 5 and 6.
 - **Before step 7 (ship):** If this touches production-visible behavior, follow `/ship` with `/land-and-deploy` + `/canary` (gstack).
 
@@ -32,9 +32,9 @@ Medium-scope work gets full discipline but skips the multi-role review gauntlet 
 - `/autoplan`
 - Worktree isolation + `superpowers:subagent-driven-development`
 
-Using them here is overkill. If you think you need them, you're probably doing `brains-complex`.
+Using them here is overkill. If you think you need them, you're probably doing `toolbox-complex`.
 
 ## Escalate
 
-- Scope creeps beyond one subsystem → `brains-complex`.
+- Scope creeps beyond one subsystem → `toolbox-complex`.
 - Plan review finds the premise is wrong → back to step 1, possibly re-classify.

@@ -1,9 +1,9 @@
 ---
-name: brains-bug
+name: toolbox-bug
 description: Use when investigating unexpected behavior, test failures, error messages, regressions, or any "why is this broken" / "this isn't working" question.
 ---
 
-# brains-bug
+# toolbox-bug
 
 Find the root cause. Reproduce it with a test. Fix it. Verify. Do not patch symptoms.
 
@@ -28,4 +28,4 @@ Find the root cause. Reproduce it with a test. Fix it. Verify. Do not patch symp
 
 ## Escalate
 
-If the bug reveals a systemic issue touching many files or requires redesign: abort and invoke `brains-complex`. Record what you learned so the complex route can start with it.
+If the bug reveals a systemic issue touching many files or requires redesign: abort and invoke `toolbox-complex`. Record what you learned so the complex route can start with it.
