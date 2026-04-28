@@ -1,14 +1,9 @@
 {
-  "_comment": "Optional hard-trigger for the brains router. Rename this file to hooks.json to activate. Fires on every user prompt and injects a short reminder into the model's context suggesting it invoke /brains for non-trivial tasks. Enable only if soft-trigger (description-based) proves unreliable in practice.",
-  "UserPromptSubmit": [
+  "_comment": "devteam SessionStart hook — surfaces project status when entering a repo with .devteam/state/. Activated by /lead-setup which writes this entry to ~/.claude/settings.json. Rename to hooks.json to enable plugin-local activation (rarely needed; settings-level registration is the standard path).",
+  "SessionStart": [
     {
-      "matcher": "*",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "echo 'Reminder: if this looks like a non-trivial development task or project kickoff, invoke the brains router skill before acting.'"
-        }
-      ]
+      "type": "command",
+      "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh"
     }
   ]
 }
