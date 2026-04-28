@@ -16,7 +16,7 @@ LEAD and specialists read/write these files. This document is the contract.
 | `think.md` | THINKER | THINK phase output |
 | `plan.md` | PLANNER | Final plan |
 | `plan-partitions.md` | PLANNER | YAML partition map BUILD consumes |
-| `plan-critiques/{eng,ceo,design,devex}.md` | PLANNER (via gstack /plan-*-review) | Parallel critique outputs |
+| `plan-critiques/{eng,lead,design,devex}.md` | PLANNER (via gstack /plan-*-review) | Parallel critique outputs (note: `lead.md` is produced by gstack `/plan-ceo-review` — gstack command name preserved per HANDOFF) |
 | `build-progress.md` | LEAD | Per-partition status (human-readable handover) |
 | `build-status.json` | LEAD | Per-partition status (machine-readable) |
 | `review-findings.json` | LEAD | Merged findings array |
