@@ -1,0 +1,9 @@
+{
+  "_comment": "devteam SessionStart hook — surfaces project status when entering a repo with .devteam/state/. Activated by /lead-setup which writes this entry to ~/.claude/settings.json. Rename to hooks.json to enable plugin-local activation (rarely needed; settings-level registration is the standard path).",
+  "SessionStart": [
+    {
+      "type": "command",
+      "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh"
+    }
+  ]
+}

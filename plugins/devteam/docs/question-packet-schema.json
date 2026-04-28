@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "devteam question packet",
+  "type": "object",
+  "required": ["status", "phase"],
+  "properties": {
+    "status": { "enum": ["complete", "blocked", "failed"] },
+    "phase": { "enum": ["THINK", "PLAN", "BUILD", "REVIEW", "TEST", "SHIP", "REFLECT"] },
+    "summary": { "type": "string" },
+    "artifacts": { "type": "array", "items": { "type": "string" } },
+    "next_phase_ready": { "type": "boolean" },
+    "notes_for_lead": { "type": "string" },
+    "question": { "type": "string" },
+    "options": { "type": "array" },
+    "specialist_recommendation": { "type": "string" },
+    "reasoning": { "type": "string" },
+    "context_needed_to_resume": { "type": "string" },
+    "failure_kind": { "enum": ["timeout", "malformed_output", "tool_error", "agent_error"] },
+    "details": { "type": "string" },
+    "partial_artifacts": { "type": "array", "items": { "type": "string" } }
+  }
+}
