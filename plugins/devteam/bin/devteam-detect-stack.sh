@@ -74,7 +74,20 @@ project_dir = sys.argv[3]
 mode = sys.argv[4]  # "convention" or "tests"
 
 with open(index_path) as f:
-    entries = json.load(f)
+    raw = json.load(f)
+
+# Support two formats:
+#   - Legacy (tests): raw list of {"convention": "...", "signals": [...], "tests": [...]}
+#   - Stage-8 format: {"version": 1, "stacks": [{"name": "...", "convention_files": [...], ...}]}
+if isinstance(raw, list):
+    entries = raw
+    def get_conventions(entry):
+        c = entry.get("convention", "")
+        return [c] if c else []
+else:
+    entries = raw.get("stacks", [])
+    def get_conventions(entry):
+        return entry.get("convention_files", [])
 
 def signal_matches(signal, project_dir):
     """Return True if a single signal dict matches the project at project_dir."""
@@ -97,9 +110,8 @@ def signal_matches(signal, project_dir):
 seen_tests = set()
 
 for entry in entries:
-    convention = entry.get("convention", "")
-    signals    = entry.get("signals", [])
-    tests      = entry.get("tests", [])
+    signals = entry.get("signals", [])
+    tests   = entry.get("tests", [])
 
     # Convention matches if ANY signal matches
     matched = any(signal_matches(s, project_dir) for s in signals)
@@ -107,8 +119,9 @@ for entry in entries:
         continue
 
     if mode == "convention":
-        abs_path = os.path.join(conv_base, convention)
-        print(abs_path)
+        for convention in get_conventions(entry):
+            abs_path = os.path.join(conv_base, convention)
+            print(abs_path)
     else:
         for t in tests:
             if t not in seen_tests:

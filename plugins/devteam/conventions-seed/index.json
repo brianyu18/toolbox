@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "stacks": [
+    {
+      "name": "claude-code-plugin",
+      "signals": [
+        { "file_exists": ".claude-plugin/plugin.json" },
+        { "file_exists": "plugin.json" }
+      ],
+      "convention_files": ["languages/claude-code-plugin.md"],
+      "tests": []
+    },
+    {
+      "name": "pinescript",
+      "signals": [
+        { "file_exists": "scripts.pine" },
+        { "file_contains": { "file": ".gitignore", "pattern": "\\.pine" } }
+      ],
+      "convention_files": ["languages/pinescript.md"],
+      "tests": []
+    },
+    {
+      "name": "react",
+      "signals": [
+        { "file_contains": { "file": "package.json", "pattern": "\"react\"" } }
+      ],
+      "convention_files": ["frontend/react.md"],
+      "tests": ["jest", "vitest"]
+    },
+    {
+      "name": "nextjs",
+      "signals": [
+        { "file_contains": { "file": "package.json", "pattern": "\"next\"" } }
+      ],
+      "convention_files": ["frontend/nextjs.md"],
+      "tests": ["jest", "vitest", "playwright"]
+    },
+    {
+      "name": "tailwind",
+      "signals": [
+        { "file_exists": "tailwind.config.js" },
+        { "file_exists": "tailwind.config.ts" },
+        { "file_contains": { "file": "package.json", "pattern": "\"tailwindcss\"" } }
+      ],
+      "convention_files": ["frontend/tailwind.md"],
+      "tests": []
+    },
+    {
+      "name": "node-backend",
+      "signals": [
+        { "file_contains": { "file": "package.json", "pattern": "\"(express|fastify|hono)\"" } }
+      ],
+      "convention_files": ["backend/node.md"],
+      "tests": ["jest", "vitest"]
+    },
+    {
+      "name": "supabase",
+      "signals": [
+        { "file_contains": { "file": "package.json", "pattern": "@supabase/(ssr|supabase-js)" } },
+        { "file_exists": "supabase/config.toml" }
+      ],
+      "convention_files": ["backend/supabase.md"],
+      "tests": ["jest", "vitest"]
+    },
+    {
+      "name": "postgres",
+      "signals": [
+        { "file_contains": { "file": "package.json", "pattern": "\"(pg|postgres|drizzle-orm|kysely)\"" } },
+        { "file_exists": "migrations" }
+      ],
+      "convention_files": ["db/postgres.md"],
+      "tests": []
+    }
+  ]
+}
