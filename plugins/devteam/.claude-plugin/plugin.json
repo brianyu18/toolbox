@@ -1,11 +1,15 @@
 {
-  "name": "toolbox",
-  "version": "0.1.0",
-  "description": "Workflow router skills that pick the right combination of superpowers + gstack skills for a development task based on its complexity.",
-  "author": {
-    "name": "Brian Yu"
-  },
-  "repository": "https://github.com/brianyu18/toolbox",
+  "name": "devteam",
+  "version": "1.0.0",
+  "description": "Multi-agent dev team in a box. LEAD orchestrates THINK / PLAN / BUILD / REVIEW / TEST / SHIP / REFLECT phases via specialist subagents with parallel fan-out, structured handoffs, and a team slack audit log.",
+  "author": { "name": "Brian Yu" },
+  "repository": "https://github.com/brianyu18/devteam",
   "license": "MIT",
-  "keywords": ["workflow", "router", "superpowers", "gstack", "orchestration"]
+  "keywords": ["agent-team", "lead", "orchestration", "subagents", "workflow", "superpowers", "gstack", "multi-agent"],
+  "requires": {
+    "plugins": [
+      { "name": "superpowers", "marketplace": "claude-plugins-official", "min_version": "5.0.0" },
+      { "name": "gstack", "marketplace": "any", "optional": false }
+    ]
+  }
 }
