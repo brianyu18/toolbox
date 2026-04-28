@@ -275,9 +275,9 @@ Verify schema file: `docs/question-packet-schema.json` has `"required": ["status
 
 **Scenario:** After running a simple task (T01 or T14 `/build` pass), inspect `state/slack.md` and validate every line matches the expected format.
 
-**Regex:**
+**Regex (single space after `]` — the slack-append convention preserves caller's `[ACTOR#] SEV` formatting and prefixes with `#<id>  <ts>  `):**
 ```
-^#\d{2}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}  \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}  \[[A-Za-z0-9_:/-]+#[0-9]+\]  [A-Z]+  .+$
+^#\d{2}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}  \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}  \[[A-Za-z0-9_:/-]+#[0-9]+\] (INFO|DECISION|QUESTION|ANSWER|FUNNEL|BLOCKER|DESTRUCTIVE|DONE|ERROR|MODE|SUMMARY|WATCHLIST)  .+$
 ```
 
 **Expected:**
