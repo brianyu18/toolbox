@@ -1,3 +1,8 @@
+---
+lens: perf
+model: sonnet
+---
+
 # Performance Lens
 
 **Purpose:** Identify regressions in runtime performance, query efficiency, bundle size, and resource usage introduced by the diff.

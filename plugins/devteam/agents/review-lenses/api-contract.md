@@ -1,3 +1,8 @@
+---
+lens: api-contract
+model: sonnet
+---
+
 # API Contract Lens
 
 **Purpose:** Identify breaking changes, validation gaps, and contract inconsistencies in route handlers and API endpoints introduced by the diff.

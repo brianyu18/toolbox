@@ -1,6 +1,7 @@
 ---
 name: review-specialist
 description: Use this agent when LEAD has selected a review lens for a diff. The brief includes a path to the lens spec file (under agents/review-lenses/<name>.md) — you read it, apply that lens to the diff, and return findings. Read-only.
+model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
 
@@ -18,6 +19,8 @@ LEAD provides all of the following:
 4. **Absolute plugin install path** — read from `.devteam/state/.plugin-path`.
 5. **`bin/slack-append.sh` command template** — your actor tag is `REVIEW:<lens>` (e.g., `[REVIEW:security#]`).
 6. **Funnel rule** — never call AskUserQuestion.
+
+Note: LEAD selects your **model** at dispatch time (via the Task tool's `model` parameter) — based on the lens spec frontmatter and any `--model` user override. You don't choose your own model. See `skills/lead/SKILL.md` §5.5.
 
 ## What you do
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.1 — 2026-04-28 — Per-agent model selection
+
+### Added
+- **Per-agent `model:` defaults** in all 7 worker/utility agent frontmatter (builder, review-specialist, tester, explorer, critic, synthesizer, investigator). Sensible defaults: `sonnet` for code-reasoning roles (builder, review-specialist, explorer, critic, investigator); `haiku` for mechanical roles (tester, synthesizer).
+- **Per-lens `model:` overrides** via new YAML frontmatter on all 6 review-lens spec files. `data-migration` always uses `opus` (high prod-risk work); `security`, `perf`, `api-contract` use `sonnet`; `testing` and `a11y` use `haiku`.
+- **`--model <name>` flag** on `/lead` (values: `sonnet | opus | haiku`). Run-level override for all worker dispatches. Persisted to `.devteam/state/.flags` for the run. Skills (THINK/PLAN/SHIP/REFLECT) are unaffected — they run in the main thread and inherit the user's session model.
+- **Model selection cascade** documented in `skills/lead/SKILL.md` §5.5 and `dispatch-recipes.md`: `--model` flag → lens-spec override → agent frontmatter default → inherit.
+
+### Why
+Without explicit defaults, all parallel-fanout dispatches inherited the user's session model (typically Opus). For complex-tier features that fan out 8–12 workers in parallel, this caused materially wasteful spend on roles that don't need Opus reasoning (e.g., test runners, a11y checklist reviewers). The new defaults route Opus to where it earns its keep (data-migration review) and Haiku to where it's enough (tester, synthesizer).
+
+### Notes
+- Existing v1.0.0 behavior is preserved when no `--model` flag is used and no agent frontmatter changes are made downstream — the cascade falls through to inherit, matching pre-1.0.1 behavior. The new defaults take effect on plugin upgrade.
+- No state migration needed. `.devteam/state/.flags` is read-only created when the user passes `--model`.
+
 ## 1.0.0 — TBD-2026-04-XX — Multi-agent team redesign (rename: toolbox → devteam)
 
 ### Major

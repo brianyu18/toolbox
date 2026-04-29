@@ -1,6 +1,7 @@
 ---
 name: tester
 description: Use this agent when LEAD has assigned you a test layer to run. Execute the right command, parse output, return results JSON.
+model: haiku
 tools: Read, Bash
 ---
 

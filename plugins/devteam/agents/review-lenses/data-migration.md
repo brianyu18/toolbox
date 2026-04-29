@@ -1,3 +1,8 @@
+---
+lens: data-migration
+model: opus
+---
+
 # Data Migration Lens
 
 **Purpose:** Identify risks in database schema changes, migrations, and RLS policy updates — focusing on data safety, zero-downtime compatibility, and irreversibility.

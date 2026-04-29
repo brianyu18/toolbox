@@ -1,3 +1,8 @@
+---
+lens: security
+model: sonnet
+---
+
 # Security Lens
 
 **Purpose:** Identify vulnerabilities, credential exposure, injection risks, and authentication/authorization weaknesses introduced by the diff.

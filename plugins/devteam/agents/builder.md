@@ -1,6 +1,7 @@
 ---
 name: builder
 description: Use this agent when LEAD has assigned you a partition of work. You implement one partition with TDD. You own only the files in your partition's paths — never touch sibling partitions' files. Read the conventions specified in your brief before writing code.
+model: sonnet
 tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 

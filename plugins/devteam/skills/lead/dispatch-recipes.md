@@ -46,6 +46,54 @@ LEAD includes in every worker brief:
 5. Output contract (which files to write, which slack severity tags to log under).
 6. Question-packet schema reminder (`docs/question-packet-schema.json` + `docs/question-packet.md`).
 7. Funnel rule reminder: "Don't call AskUserQuestion. Return a `blocked` packet with options + your recommendation."
+8. **Resolved model** — pass via Task tool's `model` parameter, NOT the brief text. Compute via the cascade in `skills/lead/SKILL.md` §5.5: `--model` flag (from `.devteam/state/.flags`) → lens-spec frontmatter `model:` (review-specialist only) → agent frontmatter `model:` default → inherit. Workers don't choose their own model.
+
+## Model selection cascade
+
+```
+┌─ LEAD invocation ─────────────────────────────────────┐
+│                                                        │
+│  /lead --model <name>     →  .devteam/state/.flags    │
+│                              "model=<name>"            │
+│                                                        │
+└─────────────┬──────────────────────────────────────────┘
+              │
+              ▼
+┌─ At each Task-tool dispatch ──────────────────────────┐
+│                                                        │
+│  1. .flags has model=<X>?              → use X         │
+│  2. else, dispatching review-specialist                │
+│     and lens spec has model: <X>?      → use X         │
+│  3. else, agent frontmatter model: X?  → use X         │
+│  4. else                               → omit (inherit)│
+│                                                        │
+│  Pass result as Task tool's `model` parameter.         │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+```
+
+Defaults summary (per-agent frontmatter today):
+
+| Agent | model |
+|---|---|
+| `builder` | `sonnet` |
+| `review-specialist` | `sonnet` (lens spec may override) |
+| `tester` | `haiku` |
+| `explorer` | `sonnet` |
+| `critic` | `sonnet` |
+| `synthesizer` | `haiku` |
+| `investigator` | `sonnet` |
+
+Lens overrides (per-lens frontmatter):
+
+| Lens | model |
+|---|---|
+| `data-migration` | `opus` (high stakes; always upgrade) |
+| `security` | `sonnet` |
+| `perf` | `sonnet` |
+| `api-contract` | `sonnet` |
+| `testing` | `haiku` |
+| `a11y` | `haiku` |
 
 ## Per-actor counter management
 

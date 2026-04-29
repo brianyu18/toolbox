@@ -13,6 +13,7 @@ LEAD and specialists read/write these files. This document is the contract.
 | `.last-phase` | LEAD | Last completed phase name |
 | `.plugin-path` | LEAD (on startup) | Absolute path to devteam plugin install dir |
 | `.started-in` | First specialist invoked | `lead` or `direct` |
+| `.flags` | LEAD (when user passes flags like `--model`) | Run-level flags as `key=value` lines (e.g., `model=opus`). Read by LEAD at boot; applied during worker dispatch. See `skills/lead/SKILL.md` §5.5. |
 | `think.md` | THINKER | THINK phase output |
 | `plan.md` | PLANNER | Final plan |
 | `plan-partitions.md` | PLANNER | YAML partition map BUILD consumes |

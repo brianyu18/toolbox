@@ -4,13 +4,13 @@
     "name": "Brian Yu"
   },
   "metadata": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Multi-agent dev team in a box. LEAD orchestrates THINK / PLAN / BUILD / REVIEW / TEST / SHIP / REFLECT phases via specialist subagents with parallel fan-out, structured handoffs, and a team slack audit log."
   },
   "plugins": [
     {
       "name": "devteam",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Multi-agent dev team. LEAD skill orchestrates phases via specialists; structured handoffs and team-slack audit log.",
       "source": "./plugins/devteam"
     }

@@ -1,3 +1,8 @@
+---
+lens: testing
+model: haiku
+---
+
 # Testing Lens
 
 **Purpose:** Identify gaps in test coverage, fragile test patterns, and missing test cases for logic introduced by the diff.

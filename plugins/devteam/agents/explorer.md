@@ -1,6 +1,7 @@
 ---
 name: explorer
 description: Use this agent when LEAD needs multiple independent perspectives on a question before deciding. Each explorer instance receives a distinct brief angle (e.g., "argue for X", "argue against X", "frame as technical problem"). Returns a structured argument, not a decision.
+model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
 

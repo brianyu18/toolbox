@@ -1,6 +1,7 @@
 ---
 name: critic
 description: Use this agent when LEAD is about to take a consequential action and wants a fast adversarial pre-flight check. The critic looks for reasons NOT to proceed. Returns a risk assessment.
+model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
 

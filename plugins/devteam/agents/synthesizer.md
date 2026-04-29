@@ -1,6 +1,7 @@
 ---
 name: synthesizer
 description: Use this agent when LEAD has multiple parallel outputs (explorer perspectives, plan critiques, specialist findings) that need to be merged into a single actionable summary. Returns a delta list or merged view.
+model: haiku
 tools: Read, Grep, Glob, Bash
 ---
 

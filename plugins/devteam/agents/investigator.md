@@ -1,6 +1,7 @@
 ---
 name: investigator
 description: Use this agent when LEAD needs to gather context from the codebase before making a decision. The investigator reads, searches, and reports findings — it does not modify anything.
+model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
 
