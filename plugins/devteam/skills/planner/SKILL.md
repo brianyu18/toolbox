@@ -22,7 +22,7 @@ Use `superpowers:writing-plans` as your engine. Draft → critique (parallel) �
 ### Phase A — draft
 1. Read `think.md` and (if present) `DESIGN.md`.
 2. Draft a plan with: Goal, Approach, Step list, Files touched, Tests required, Risks.
-3. Identify partitions (non-overlapping file groups). Group partitions into **waves** by dependency: `dependencies: []` and `parallel_safe: true` are wave 1; partitions blocked on wave 1 are wave 2; etc. (LEAD reads this directly to schedule parallel BUILDER fan-out per A1-final.)
+3. Identify partitions (non-overlapping file groups). Additionally mark `contract_isolated: true` on any partition that is a sealed unit — its own directory/repo, a frozen interface contract in the plan, zero mid-wave coordination needed (e.g. a new standalone service, CLI tool, or engine module). LEAD may route such partitions to the Codex build lane; never mark UI partitions contract_isolated (presto-first: UI stays with frontend-specialist). Group partitions into **waves** by dependency: `dependencies: []` and `parallel_safe: true` are wave 1; partitions blocked on wave 1 are wave 2; etc. (LEAD reads this directly to schedule parallel BUILDER fan-out per A1-final.)
 4. Write to `.devteam/state/plan.md`.
 
 ### Phase B — parallel critique (tier feature & complex)
