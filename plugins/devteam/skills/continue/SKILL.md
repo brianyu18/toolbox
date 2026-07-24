@@ -17,9 +17,11 @@ You own the CONTINUE action. Load a prior checkpoint from `~/.claude/devteam/che
 
 ## Steps
 
-1. **Resolve paths.**
+1. **Resolve paths.** Prefer the git toplevel so cwd-inside-a-subdir resolves to the
+   same slug `/checkpoint` and `/relay` write (falls back to `pwd` outside a repo):
    ```sh
-   SLUG=$(pwd | sed 's|/|-|g')
+   PROJ=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+   SLUG=$(echo "$PROJ" | sed 's|/|-|g')
    DIR="$HOME/.claude/devteam/checkpoints/$SLUG"
    ```
 
@@ -27,7 +29,17 @@ You own the CONTINUE action. Load a prior checkpoint from `~/.claude/devteam/che
 
    ### (a) No arg / `latest` / `--with-decisions`
    - If `$DIR/latest.md` does not exist:
-     - Print: `No checkpoint for <slug>. Run /checkpoint to create one.`
+     - **Mirror fallback (cross-machine relay baton).** If `$PROJ/.relay/baton.md` exists,
+       this repo carries a relay mission's transport mirror (see the `relay` skill) and this
+       machine simply has no local checkpoint dir — the mirror IS the baton here. Load
+       `$PROJ/.relay/baton.md` as the checkpoint body (it is a full enriched `latest.md`
+       copy), read `$PROJ/.relay/relay.json` for mission lineage (mission_id, legs, goal,
+       finish line), print `Loaded from .relay/ mirror (no local checkpoint on this machine
+       — mirror saved_at <ts>, leg <N>)`, and jump to step 3 with that content.
+       Precedence rule (load-bearing): a LOCAL checkpoint is always canonical — this
+       fallback fires ONLY when the local read misses; never prefer the mirror when
+       `$DIR/latest.md` exists.
+     - Otherwise print: `No checkpoint for <slug>. Run /checkpoint to create one.`
      - If any other `$HOME/.claude/devteam/checkpoints/*/latest.md` exists: also print `Other projects have checkpoints — run /continue list to see all.`
      - Exit.
    - Else: read frontmatter fields (`name`, `description`, `saved_at`, `has_decisions`).
@@ -38,7 +50,11 @@ You own the CONTINUE action. Load a prior checkpoint from `~/.claude/devteam/che
    ### (b) `<name>` (any non-keyword arg)
    - Look in `$DIR/named/<name>.md` first.
    - Fallback: find latest `$DIR/history/*<name>*.md` by mtime.
-   - If neither: `No checkpoint named '<name>' for <slug>` → exit.
+   - **Mirror fallback (cross-machine relay baton):** if neither local slot matches AND
+     `$PROJ/.relay/relay.json` exists with `mission_id == <name>`, load
+     `$PROJ/.relay/baton.md` as the baton (same precedence rule as (a): local is
+     canonical, the mirror fires only on a local miss). Print the mirror provenance line.
+   - If none of the above: `No checkpoint named '<name>' for <slug>` → exit.
    - Read frontmatter; jump to step 3.
 
    ### (c) `list`

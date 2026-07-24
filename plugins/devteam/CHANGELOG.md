@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.5.0 — 2026-07-24 — /relay baton-pass (graduated)
+
+### Added
+- **`/relay`** — pass the current mission to a FRESH session as a *baton* (a relay leg, not a
+  resume): mission lifecycle (mint/append/complete with `--done` + judged completion), a
+  Relay block appended to the checkpoint, a collision-immune baton in the mission's
+  `named/<mission_id>.md` slot, an append-only `relay.json` trail (mission_id, goal,
+  definition-of-done, per-leg outcome/next), and a secret-scrubbed in-repo `.relay/` mirror
+  (gitignored by default; interactive-only consent to commit). Graduated from claude-sync
+  after the stability gate: 7-item council hardening, a live manual pass on a real 24h
+  mission, and the agent-os kernel's automated button-pass verified end-to-end 2026-07-23.
+- **`/continue` mirror-fallback (cross-machine baton read).** When a repo has no local
+  checkpoint dir (fresh machine), `/continue` now falls back to `.relay/baton.md` +
+  `.relay/relay.json` in the repo — both the bare and `<mission_id>` forms. Local
+  checkpoints remain canonical; the mirror fires only on a local miss.
+
+### Changed
+- **`/checkpoint` + `/continue` slug resolution** now prefers the git toplevel
+  (`git rev-parse --show-toplevel`, falling back to `pwd` outside a repo) so saves from a
+  subdirectory land in the same slug `/relay` and `/continue` read. Backward compatible:
+  non-repo projects resolve exactly as before; repo sessions run at the toplevel resolve
+  to the same slug as before.
+
+### Notes
+- **Dependency inversion (council design):** the relay's durability CORE is the plugin's own
+  checkpoint. Brain/vault layers (the claude-sync `fullsave` stack) are an OPTIONAL
+  enhancement — detected at run time, never required; the skill degrades to checkpoint-only
+  with an honest report line. The devteam plugin remains brain-agnostic.
+- **Automation contract:** external automation (the agent-os kernel) injects
+  `/relay --attempt <id>`; the skill echoes the attempt id in the leg it writes — that echo
+  is the completion handshake. The relay.json schema is read fail-closed by `agent_os.relay`;
+  keep them in lockstep (schema stated inline in the skill's step 5).
+- Backward compatible — purely additive (new skill + command; the continue fallback only
+  fires where it previously dead-ended with "No checkpoint").
+
 ## 1.4.1 — 2026-06-20 — /startup guided goal-intake
 
 ### Added

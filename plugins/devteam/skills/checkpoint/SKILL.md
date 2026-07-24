@@ -24,9 +24,12 @@ Never auto-checkpoint silently on intent. Always ask first.
 
 ## Steps
 
-1. **Resolve paths.**
+1. **Resolve paths.** Prefer the git toplevel so a checkpoint written from a subdir
+   lands in the same slug `/continue` and `/relay` read (falls back to `pwd` outside
+   a git repo — fully backward compatible for non-repo projects):
    ```sh
-   SLUG=$(pwd | sed 's|/|-|g')
+   PROJ=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+   SLUG=$(echo "$PROJ" | sed 's|/|-|g')
    DIR="$HOME/.claude/devteam/checkpoints/$SLUG"
    mkdir -p "$DIR/history" "$DIR/named"
    ```
